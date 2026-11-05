@@ -36,4 +36,4 @@ Docker (local build only): `docker build -t x7x24:local .`. Run with a disposabl
 
 Browser baseline after Tailwind4: Safari16.4+, Chrome111+, Firefox128+. TypeScript targets ES2022. Node24.22.1 is pinned in .nvmrc, engines, CI and Docker; this task uses an isolated official Node binary and does not replace system Node.
 
-Boot4 uses the documented deprecated Jackson2 bridge for current canonical JSON compatibility; Spring7, Tomcat11/Servlet6.1 and Flyway starter changes are verified by the suite. See release-preparation.md for exact versions and limits.
+Boot 4 uses the documented deprecated Jackson 2 bridge for current canonical JSON compatibility; Spring 7, Tomcat 11 / Servlet 6.1 and the Flyway starter are covered by the test suite. Pin exact versions via the Maven BOM and `package-lock.json`.

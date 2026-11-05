@@ -71,13 +71,13 @@ docs/               decisions（5 个自治边界决策）· dev-plan · adapter
 
 ## 验证与限制
 
-本次快照的验证、清理、遗留风险见 [准备报告](docs/release-preparation.md) 和 [依赖扫描清单](docs/security-findings.json)。当前依赖复扫无命中；扫描发现或工具失败仍会阻断 CI。部署配置、密钥与基础设施细节不在本仓库中。
+依赖与密钥扫描在 CI 中失败即阻断合并。部署配置、密钥与基础设施细节不在本仓库中；请按 [安装](docs/installation.md) 与 [.env.example](.env.example) 自行配置。
 
 - 实验性自治交付软件；不承诺生产安全或完全消除数据泄漏。
 - 已有工作区角色和 RLS，后台系统上下文仍有跨租户权限；部署账号与数据库权限须独立限制。
 - 自研事件溯源引擎，Temporal 仅有接口。Prometheus 金丝雀和真实部署回滚未在本次验证。
 - LLM 成本为可配置估算，多评审模型的独立性取决于部署配置。
-- 依赖/字体许可已建立构建清单；旧图标已统一替换为有官方许可证据的 Lucide，兼容的滚动条补丁已按精确源码许可锁定，详见 docs/materials-audit.md。原7x24数据库不可直接接入。
+- 依赖/字体许可见 [THIRD_PARTY.md](THIRD_PARTY.md) 与 `docs/dependency-licenses.json` / `docs/maven-dependency-licenses.json`；UI 图标使用官方 Lucide。不要接入其他产品的旧数据库。
 
 ## 产品线与项目
 

@@ -36,7 +36,7 @@ See `docs/dependency-licenses.json` for package-declared licenses of installed n
 
 ## Upgrade audit and packaged evidence
 
-See docs/materials-audit.md, docs/materials-audit.json, docs/bundled-frontend-licenses.json and docs/maven-dependency-licenses.json. The web build emits original notices and its inventory, including the font families listed above. The server preserves original nested-library notices and project LICENSE/NOTICE. The react-remove-scroll-bar provenance gap is resolved by a compatible2.3.7 exact-source pin; the rejected2.3.8 mapping is recorded, not inferred from another version. All 31 previously unprovenanced UI icon paths were removed and replaced with official Lucide named imports. H2 retains its own MPL2.0/EPL1.0 terms. No dependency is relicensed by the project Apache-2.0 declaration.
+See docs/bundled-frontend-licenses.json, docs/dependency-licenses.json and docs/maven-dependency-licenses.json. The web build emits original notices and its inventory, including the font families listed above. The server preserves original nested-library notices and project LICENSE/NOTICE. UI icons use official Lucide named imports. H2 retains its own MPL 2.0 / EPL 1.0 terms. No dependency is relicensed by the project Apache-2.0 declaration.
 
 
 ## Lucide UI icons
