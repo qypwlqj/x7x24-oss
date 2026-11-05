@@ -1,0 +1,21 @@
+[Unit]
+Description=x7x24 agent runner (one code-agent container at a time)
+After=network-online.target docker.service wg-quick@wg0.service
+Requires=docker.service wg-quick@wg0.service
+
+[Service]
+User=x7runner
+Group=x7runner
+SupplementaryGroups=docker
+EnvironmentFile=/opt/x7x24-agent/runnerd.env
+ExecStart=/usr/bin/python3 /opt/x7x24-agent/runnerd.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/opt/x7x24-agent/jobs /opt/x7x24-agent/cache
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,23 @@
+name: Build Next.js web artifact
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24.22.1, cache: npm }
+      - run: npm ci
+      - run: npm run verify
+      - name: Package standalone Next.js server
+        run: |
+          cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/static
+          cp -r apps/web/public apps/web/.next/standalone/apps/web/public
+      - uses: actions/upload-artifact@v4
+        with:
+          name: next-web-standalone
+          path: apps/web/.next/standalone
+          include-hidden-files: true

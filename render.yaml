@@ -1,0 +1,38 @@
+# Optional template only. No deployment is performed by preparing this snapshot.
+# Supply your own origins, OAuth app, credentials and non-superuser PostgreSQL role.
+services:
+  - type: web
+    name: x7x24-api
+    runtime: docker
+    branch: main
+    dockerfilePath: ./apps/server-java/Dockerfile
+    dockerContext: ./apps/server-java
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USER
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: X7_ALLOWED_ORIGINS
+        sync: false
+      - key: X7_PUBLIC_URL
+        sync: false
+      - key: X7_AUTH_REQUIRED
+        value: "true"
+      - key: X7_ALLOWED_GITHUB_LOGINS
+        sync: false
+      - key: X7_PLATFORM_ADMINS
+        sync: false
+      - key: GITHUB_OAUTH_CLIENT_ID
+        sync: false
+      - key: GITHUB_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: X7_SECRET_KEY
+        sync: false
+      - key: ADAPTER_MODE
+        value: offline
+      - key: ADAPTER_DRY_RUN
+        value: "true"

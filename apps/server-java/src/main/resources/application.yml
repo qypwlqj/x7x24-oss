@@ -1,0 +1,108 @@
+server:
+  port: ${PORT:8787}
+  forward-headers-strategy: framework
+spring:
+  application.name: x7x24
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:file:${DATA_DIR:./data}/x7x24;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=DAY,VALUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=FALSE}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/common,classpath:db/migration/{vendor}
+  mvc.async.request-timeout: -1
+  # Boot4 documented compatibility bridge; keep HTTP and persisted JsonNode contracts.
+  http.converters.preferred-json-mapper: jackson2
+  jackson2.default-property-inclusion: always
+logging.level:
+  root: INFO
+  org.flywaydb: WARN
+  com.zaxxer: WARN
+
+# 7x24 配置：全部可用环境变量覆盖。凭据通过部署环境或集成界面配置；持久化加密，运行目录须保密。
+x7x24:
+  learning:
+    enabled: ${LEARNING_ENABLED:false}
+    model-enabled: ${LEARNING_MODEL_ENABLED:false}
+    daily-usd: ${LEARNING_DAILY_USD:2}
+    max-call-usd: ${LEARNING_MAX_CALL_USD:0.25}
+    min-evaluation-cases: ${LEARNING_MIN_EVALUATION_CASES:20}
+    docker-image: ${LEARNING_DOCKER_IMAGE:}
+    test-command: ${LEARNING_TEST_COMMAND:}
+    test-timeout-seconds: ${LEARNING_TEST_TIMEOUT_SECONDS:30}
+    project-delay-ms: ${LEARNING_PROJECT_DELAY_MS:60000}
+  notifications:
+    app-url: ${NOTIFICATION_APP_URL:${X7_PUBLIC_URL:}}
+    from: ${NOTIFICATION_FROM:}
+    worker-enabled: ${NOTIFICATION_WORKER_ENABLED:true}
+    smtp:
+      host: ${NOTIFICATION_SMTP_HOST:}
+      port: ${NOTIFICATION_SMTP_PORT:587}
+      username: ${NOTIFICATION_SMTP_USERNAME:}
+      password: ${NOTIFICATION_SMTP_PASSWORD:}
+      starttls: ${NOTIFICATION_SMTP_STARTTLS:true}
+      ssl: ${NOTIFICATION_SMTP_SSL:false}
+  web-dir: ${WEB_DIR:../web/dist}
+  github:
+    token: ${GITHUB_TOKEN:}
+    api-url: ${GITHUB_API_URL:https://api.github.com}
+    web-url: ${GITHUB_WEB_URL:https://github.com}
+    # GitHub App 的 Client ID（公开值，不是密钥）；设备码登录只需要它，不需要 client secret。
+    oauth-client-id: ${GITHUB_OAUTH_CLIENT_ID:}
+    app-slug: ${GITHUB_APP_SLUG:}
+    app-id: ${GITHUB_APP_ID:}
+    private-key: ${GITHUB_APP_PRIVATE_KEY:}
+  # 令牌加密主密钥；未设置时在 DATA_DIR 下生成随机密钥文件（权限 600）
+  secret-key: ${X7_SECRET_KEY:}
+  data-dir: ${DATA_DIR:./data}
+  adapter:
+    # offline（默认，不触网）| real（真实 GitHub）。real 下 dry-run 默认开启，必须显式 ADAPTER_DRY_RUN=false 才会写入。
+    mode: ${ADAPTER_MODE:offline}
+    dry-run: ${ADAPTER_DRY_RUN:true}
+    ci-timeout-sec: ${CI_TIMEOUT_SEC:1200}
+    ci-start-timeout-sec: ${CI_START_TIMEOUT_SEC:45}
+    prometheus-url: ${PROMETHEUS_URL:}
+  llm:
+    base-url: ${LLM_BASE_URL:}
+    api-key: ${LLM_API_KEY:}
+    model: ${LLM_MODEL:}
+    cheap-model: ${LLM_CHEAP_MODEL:}
+    judge-models: ${LLM_JUDGE_MODELS:}      # model[@temperature],... 评审席位，最后一席兼任仲裁
+    temperature: ${LLM_TEMPERATURE:0.2}
+    # 单价为「可调估算值」（USD / 百万 token），不是官方报价；请按所用服务商的当前价格自行填写
+    price-in-per-1m: ${LLM_PRICE_IN_PER_1M:0.30}
+    price-out-per-1m: ${LLM_PRICE_OUT_PER_1M:1.20}
+    timeout-sec: ${LLM_TIMEOUT_SEC:180}
+    max-retries: ${LLM_MAX_RETRIES:3}
+    max-concurrency: ${LLM_MAX_CONCURRENCY:4}
+    min-interval-ms: ${LLM_MIN_INTERVAL_MS:0}
+  engine:
+    enabled: ${ENGINE_ENABLED:true}
+    tick-ms: ${TICK_MS:2000}
+    intake-ms: ${INTAKE_MS:30000}
+    observe-hours: ${OBSERVE_HOURS:-1}
+    test-clock: ${TEST_CLOCK:false}
+  lines:
+    - id: ${LINE_ID:sandbox}
+      name: ${LINE_NAME:x7x24-sandbox}
+      repo: ${TARGET_REPO:}
+      base-branch: ${TARGET_BASE_BRANCH:main}
+      workflow: ${TARGET_WORKFLOW:ci.yml}
+      intake-label: ${INTAKE_LABEL:7x24:signal}
+      intake-all: ${INTAKE_ALL:false}
+      release-prefix: ${RELEASE_PREFIX:x7x24}
+  # 平台管理员（GitHub 登录名，逗号分隔）：可审批业务线私有流程模板、维护技能库。未配置时不授予任何人平台管理员权限。
+  platform-admins: ${X7_PLATFORM_ADMINS:}
+  workspace:
+    # 新安装默认无遗留区所有者；只有显式指定登录名才允许首次认领 ws_legacy
+    legacy-owner: ${X7_LEGACY_WORKSPACE_OWNER:}
+  # 仅本地开发：允许模型供应商使用 http://localhost（生产保持 false，只允许 https 且禁止内网地址）
+  llm-allow-local-http: ${X7_LLM_ALLOW_LOCAL_HTTP:false}
+  # 账号体系（GitHub 登录）。client secret 只从环境变量读取；未设置时只能用设备码登录。
+  auth:
+    required: ${X7_AUTH_REQUIRED:true}
+    client-secret: ${GITHUB_OAUTH_CLIENT_SECRET:}
+    allowed-logins: ${X7_ALLOWED_GITHUB_LOGINS:}
+    allowed-origins: ${X7_ALLOWED_ORIGINS:}
+    public-url: ${X7_PUBLIC_URL:}
+    session-hours: ${X7_SESSION_HOURS:168}

@@ -1,0 +1,75 @@
+.progress-cat {
+  position: absolute;
+  width: 48px;
+  height: 40px;
+  color: rgb(var(--c-ink-2));
+  pointer-events: none;
+  visibility: hidden;
+  transform-origin: center bottom;
+}
+.progress-cat[data-positioned="true"] { visibility: visible; }
+.progress-cat-hop, .progress-cat-facing, .progress-cat-breathe { display: block; width: 48px; height: 40px; transform-origin: center bottom; }
+.progress-cat[data-direction="backward"] .progress-cat-facing { transform: scaleX(-1); }
+.progress-cat-inner-ear { fill: rgb(var(--c-sunken)); }
+.progress-cat-eyes { fill: rgb(var(--c-raised)); transform-box: fill-box; transform-origin: center; }
+.progress-cat-tail { transform-origin: 33px 29px; }
+.progress-cat-ear, .progress-cat-head, .progress-cat-figure, .progress-cat-paw-left, .progress-cat-paw-right { transform-box: fill-box; transform-origin: center bottom; }
+.progress-cat-paper { fill: rgb(var(--c-raised)); }
+.progress-cat-grid { opacity: .35; }
+.progress-cat-lens { fill: rgb(var(--c-raised) / .65); }
+.progress-cat-tools { opacity: 0; transform: translateY(2px) scale(.94); transform-origin: center bottom; transition: opacity 150ms ease-out, transform 150ms ease-out; }
+.progress-cat[data-mode="running"] .progress-cat-tools,
+.progress-cat[data-mode="done"][data-behavior="deliver"] .progress-cat-tools { opacity: 1; transform: none; }
+.progress-cat[data-moving="true"] .progress-cat-tools,
+.progress-cat[data-moving="true"] .progress-cat-paws { opacity: 0; }
+.progress-cat-confirm { opacity: 0; stroke: rgb(var(--c-success)); }
+.progress-cat[data-mode="running"] .progress-cat-breathe { animation: cat-breathe 2.4s ease-in-out infinite; }
+.progress-cat[data-mode="running"] .progress-cat-tail { animation: cat-tail 3s ease-in-out infinite; }
+.progress-cat[data-mode="running"] .progress-cat-eyes,
+.progress-cat[data-mode="waiting"] .progress-cat-eyes { animation: cat-blink 5.2s ease-in-out infinite; }
+/* 约 1.6 秒敲击、0.8 秒抬头、0.6 秒停顿；数据刷新不重建图形。 */
+.progress-cat[data-mode="running"][data-behavior="type"] .progress-cat-paw-left { animation: cat-type 3s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="type"] .progress-cat-paw-right { animation: cat-type 3s .13s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="type"] .progress-cat-head { animation: cat-glance 3s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="think"] .progress-cat-head { animation: cat-think 4s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="think"] .progress-cat-paw-right { animation: cat-note 4s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="draw"] .progress-cat-paw-right,
+.progress-cat[data-mode="running"][data-behavior="draw"] .progress-cat-pencil { animation: cat-draw 2.8s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="test"] .progress-cat-paw-right { transform: translate(7px, -3px); }
+.progress-cat[data-mode="running"][data-behavior="test"] .progress-cat-test-dot { animation: cat-test 1.8s ease-in-out infinite; animation-delay: var(--cat-test-delay, 0s); }
+.progress-cat-test-dot:nth-of-type(2) { --cat-test-delay: .3s; }
+.progress-cat-test-dot:nth-of-type(3) { --cat-test-delay: .6s; }
+.progress-cat[data-mode="running"][data-behavior="review"] .progress-cat-loupe { animation: cat-inspect 3.4s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="review"] .progress-cat-paw-right { animation: cat-inspect 3.4s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="accept"] .progress-cat-paw-right { animation: cat-checklist 3.6s ease-in-out infinite; }
+.progress-cat[data-mode="running"][data-behavior="deliver"] .progress-cat-paw-left { transform: translate(-5px, 1px) rotate(-12deg); }
+.progress-cat[data-mode="running"][data-behavior="deliver"] .progress-cat-paw-right { transform: translate(6px, 1px) rotate(12deg); }
+.progress-cat[data-mode="waiting"] .progress-cat-figure,
+.progress-cat[data-mode="stopped"] .progress-cat-figure { transform: translateY(2px) scaleY(.92); }
+.progress-cat[data-mode="paused"] .progress-cat-figure { transform: translateY(3px) scaleY(.65); }
+.progress-cat[data-mode="paused"] .progress-cat-paws { transform: translateY(2px); }
+.progress-cat[data-mode="paused"] .progress-cat-eyes { transform: scaleY(.18); }
+.progress-cat[data-mode="blocked"] .progress-cat-ear-left { transform: rotate(-16deg); }
+.progress-cat[data-mode="blocked"] .progress-cat-ear-right { transform: rotate(16deg); }
+.progress-cat[data-mode="blocked"] .progress-cat-tail { transform: rotate(22deg); }
+.progress-cat[data-mode="blocked"] .progress-cat-eyes { transform: scaleY(.7); }
+.progress-cat[data-mode="done"] .progress-cat-paw-right { transform: translate(7px, -10px) rotate(-25deg); }
+.progress-cat[data-mode="stopped"] { opacity: .6; }
+.progress-cat[data-hidden="true"] *, .progress-cat[data-moving="true"] * { animation-play-state: paused !important; }
+@keyframes cat-breathe { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-1px) scaleY(1.025); } }
+@keyframes cat-tail { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(10deg); } }
+@keyframes cat-blink { 0%, 44%, 48%, 100% { transform: scaleY(1); } 46% { transform: scaleY(.08); } }
+@keyframes cat-type {
+  0%, 6%, 14%, 22%, 30%, 38%, 46%, 54%, 100% { transform: translateY(0); }
+  3%, 10%, 18%, 26%, 34%, 42%, 50% { transform: translateY(1.6px); }
+}
+@keyframes cat-glance { 0%, 53%, 88%, 100% { transform: none; } 62%, 78% { transform: translateY(-1px) rotate(-3deg); } }
+@keyframes cat-think { 0%, 30%, 75%, 100% { transform: rotate(0); } 43%, 60% { transform: rotate(-5deg); } }
+@keyframes cat-note { 0%, 35%, 70%, 100% { transform: none; } 45%, 60% { transform: translate(3px, -2px); } }
+@keyframes cat-draw { 0%, 80%, 100% { transform: none; } 20% { transform: translate(2px, 1px); } 40% { transform: translate(-1px, 2px); } 60% { transform: translate(1px, -1px); } }
+@keyframes cat-test { 0%, 65%, 100% { opacity: .2; } 25%, 40% { opacity: 1; } }
+@keyframes cat-inspect { 0%, 100% { transform: translate(0, 0); } 40% { transform: translate(2px, 2px); } 70% { transform: translate(-1px, 3px); } }
+@keyframes cat-checklist { 0%, 100% { transform: translate(4px, -3px); } 45%, 70% { transform: translate(4px, 1px); } }
+@media (prefers-reduced-motion: reduce) {
+  .progress-cat *, .progress-cat { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:x7test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=DAY,VALUE;DB_CLOSE_DELAY=-1
+x7x24:
+  platform-admins: test,operator
+  github:
+    token: ""
+    oauth-client-id: Iv23test
+  llm:
+    api-key: ""
+    base-url: ""
+  lines:
+    - id: sandbox
+      name: Synthetic sandbox
+      repo: example-owner/example-repo
+      base-branch: main
+      workflow: ci.yml
+      intake-label: 7x24:signal
+      release-prefix: x7x24
+  notifications:
+    worker-enabled: false
+  llm-allow-local-http: true
+  engine:
+    enabled: false
+    test-clock: true
+  adapter:
+    mode: offline
+  auth:
+    required: false

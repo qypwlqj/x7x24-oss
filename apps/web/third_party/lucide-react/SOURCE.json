@@ -1,0 +1,25 @@
+{
+  "package": "lucide-react",
+  "version": "1.61.0",
+  "registryMetadata": "https://registry.npmjs.org/lucide-react/1.61.0",
+  "tarball": "https://registry.npmjs.org/lucide-react/-/lucide-react-1.61.0.tgz",
+  "tarballIntegrity": "sha512-v2SQPPPNjnr+BlhL9Spuzmo5yR+hLkftfuE4E3jaxdNPgSH0hJKPcLJBP7yAta87jQNPsSERS59PJjCJ/CorBA==",
+  "lockIntegrityMatchesTarball": true,
+  "tarballSha256": "7dc35c18dc19918a3077e9cbe1c6e16337c20f366e11b73a38a25c0031844bfc",
+  "licenseFile": "LICENSE",
+  "licenseSha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+  "declaredLicense": "ISC",
+  "licenseContents": "ISC plus MIT for Feather-derived icons; complete original package LICENSE retained",
+  "repository": {
+    "url": "https://github.com/lucide-icons/lucide.git",
+    "type": "git",
+    "directory": "packages/lucide-react"
+  },
+  "gitHead": null,
+  "reactPeer": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+  "officialDocumentation": [
+    "https://lucide.dev/license",
+    "https://lucide.dev/guide/react"
+  ],
+  "replacement": "All 31 previously unprovenanced paths removed from apps/web/src/ui/Icon.tsx; static named imports preserve semantic names and accessibility defaults."
+}

@@ -1,0 +1,25 @@
+{
+  "package": "react-remove-scroll-bar",
+  "version": "2.3.7",
+  "declaredLicense": "MIT",
+  "upstreamCommit": "8ca9ba5ea52de03308fe8ced94f7b159a44d28ff",
+  "upstreamPackageVersion": "2.3.7",
+  "publishedGitHead": "29e9fcd1eecf7d3b77a767941c4a57fe461fc1e4",
+  "publishedGitHeadResolved": true,
+  "licenseSource": "https://raw.githubusercontent.com/theKashey/react-remove-scroll-bar/8ca9ba5ea52de03308fe8ced94f7b159a44d28ff/LICENSE",
+  "sha256": "a79aae0c0f21990d9d963bb3c5a79cdcea9a46f8523ba55c58d7fe776b6ebc84",
+  "status": "Exact published gitHead matchesv2.3.7; comparison to licensed upstream commit adds LICENSE only, no source changes",
+  "reason": "Published2.3.7 declares MIT and omits notice. The retained upstream LICENSE was added without modifying the version2.3.7 source; full comparison and tarball integrity evidence retained.",
+  "sourceComparison": "https://github.com/theKashey/react-remove-scroll-bar/compare/29e9fcd1eecf7d3b77a767941c4a57fe461fc1e4...8ca9ba5ea52de03308fe8ced94f7b159a44d28ff",
+  "sourceComparisonChangedFiles": [
+    "LICENSE"
+  ],
+  "officialTag": "v2.3.7",
+  "registryMetadata": "https://registry.npmjs.org/react-remove-scroll-bar/2.3.7",
+  "registryTarball": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.7.tgz",
+  "tarballIntegrity": "sha512-UzA0npskGFA2bUqwWsSRJscuQEt7zyfVtMpCtBl/lk+k/ky6lzYImEks9jwgxTDe/B0tb5hyrYgbQv/JQaHjDw==",
+  "tarballSha256": "5ee31e784254a1a0c80b2a14a569c3dc254af4c75d709a04f79ff409e856df91",
+  "lockIntegrityMatchesTarball": true,
+  "registryLicenseDeclaration": "MIT",
+  "registryGitHead": "29e9fcd1eecf7d3b77a767941c4a57fe461fc1e4"
+}

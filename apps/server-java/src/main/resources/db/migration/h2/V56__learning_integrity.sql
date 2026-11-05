@@ -1,0 +1,12 @@
+CREATE TRIGGER learning_episode_no_update BEFORE UPDATE ON learning_episode FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_episode_no_delete BEFORE DELETE ON learning_episode FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_outcome_no_update BEFORE UPDATE ON learning_outcome FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_outcome_no_delete BEFORE DELETE ON learning_outcome FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_policy_no_update BEFORE UPDATE ON learning_policy FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_policy_no_delete BEFORE DELETE ON learning_policy FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_experience_no_update BEFORE UPDATE ON learning_experience FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_experience_no_delete BEFORE DELETE ON learning_experience FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_trial_no_update BEFORE UPDATE ON learning_trial FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_trial_no_delete BEFORE DELETE ON learning_trial FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_assignment_no_update BEFORE UPDATE ON learning_assignment FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";
+CREATE TRIGGER learning_assignment_no_delete BEFORE DELETE ON learning_assignment FOR EACH ROW CALL "com.x7x24.db.AppendOnlyTrigger";

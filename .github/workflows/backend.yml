@@ -1,0 +1,44 @@
+# 后端测试：全部 H2 测试 + 真实 Postgres 上的行级安全测试（PostgresRlsIT，决策 8A）。
+name: Backend tests
+on:
+  push: { branches: ['codex/**', main] }
+  pull_request:
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21, cache: maven }
+      # RLS 对超级用户不生效：用普通账号作为表属主（与 Render 生产一致）
+      - name: Create non-superuser role
+        env: { PGPASSWORD: postgres }
+        run: |
+          psql -h localhost -U postgres -c "CREATE ROLE x7app LOGIN PASSWORD 'x7app'"
+          psql -h localhost -U postgres -c "CREATE DATABASE x7test OWNER x7app"
+      - name: mvn test
+        working-directory: apps/server-java
+        env:
+          X7_PG_TEST_URL: jdbc:postgresql://localhost:5432/x7test
+          X7_PG_TEST_USER: x7app
+          X7_PG_TEST_PASSWORD: x7app
+        run: mvn -B test
+  runner:
+    # runnerd（含逐行审查作业）的单元测试：fake_docker + fake_ocr，不需要 Docker 和模型
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: runnerd tests
+        working-directory: apps/agent-runner
+        run: python3 -m unittest discover -p 'test_*.py' -v

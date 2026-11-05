@@ -1,0 +1,14 @@
+# x7x24-agent:claude-browser —— 在 x7x24-agent:claude 基础上加 Chromium + Playwright（MCP 与 test runner）。不含密钥。
+FROM x7x24-agent:claude
+USER root
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN npm install -g @playwright/mcp @playwright/test && npm cache clean --force \
+ && npx -y playwright install --with-deps chromium \
+ && MCPPW=$(dirname $(node -e "console.log(require.resolve('playwright/package.json',{paths:[require('path').dirname(require.resolve('@playwright/mcp/package.json',{paths:['/usr/local/lib/node_modules']}))]}))")) \
+ && node $MCPPW/cli.js install chromium \
+ && rm -rf /var/lib/apt/lists/* && chmod -R a+rX /ms-playwright && mkdir -p /opt/x7
+# 中文页面截图需要 CJK 字体
+RUN apt-get update && apt-get install -y --no-install-recommends fonts-noto-cjk && rm -rf /var/lib/apt/lists/*
+COPY mcp.json acceptance.sh snapshot.mjs /opt/x7/
+RUN chmod 755 /opt/x7/acceptance.sh && chmod 644 /opt/x7/mcp.json /opt/x7/snapshot.mjs
+USER agent

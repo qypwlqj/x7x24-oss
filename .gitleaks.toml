@@ -1,0 +1,5 @@
+title = "x7x24 open-source snapshot policy"
+[extend]
+useDefault = true
+# Prefer constructing synthetic fixtures at runtime (string concat) so scanners see no contiguous secret.
+# Keep this file for any residual exact fixtures reviewed below.

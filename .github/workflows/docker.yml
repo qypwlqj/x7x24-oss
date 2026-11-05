@@ -1,0 +1,33 @@
+name: Docker builds and smoke
+on:
+  push: { branches: [main] }
+  pull_request:
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Build both local images
+        run: |
+          set -euo pipefail
+          docker build -t x7x24:web-ci .
+          docker build -t x7x24:api-ci apps/server-java
+      - name: Fresh offline installations with authentication
+        run: |
+          set -euo pipefail
+          docker run --rm -d --label x7x24-ci=true --name x7x24-web-ci -p 127.0.0.1:18884:8787 -e ENGINE_ENABLED=false -e NOTIFICATION_WORKER_ENABLED=false x7x24:web-ci
+          docker run --rm -d --label x7x24-ci=true --name x7x24-api-ci -p 127.0.0.1:18885:8787 -e ENGINE_ENABLED=false -e NOTIFICATION_WORKER_ENABLED=false x7x24:api-ci
+          python3 scripts/smoke-offline.py http://127.0.0.1:18884
+          python3 scripts/smoke-offline.py http://127.0.0.1:18885 --api-only
+          test "$(docker exec x7x24-web-ci id -u)" = 10001
+          test "$(docker exec x7x24-api-ci id -u)" = 10001
+          docker exec x7x24-web-ci node -e 'fetch("http://127.0.0.1:8787/api/health").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+      - name: Clean up disposable containers
+        if: always()
+        run: |
+          set -euo pipefail
+          docker ps -q --filter label=x7x24-ci=true | xargs -r docker rm -f

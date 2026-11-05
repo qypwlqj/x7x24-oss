@@ -1,0 +1,25 @@
+{
+  "previousRejectedVersion": {
+    "package": "react-remove-scroll-bar",
+    "version": "2.3.8",
+    "declaredLicense": "MIT",
+    "upstreamCommit": "8ca9ba5ea52de03308fe8ced94f7b159a44d28ff",
+    "upstreamPackageVersion": "2.3.7",
+    "publishedGitHead": "b3b1287aad81def2e2ae707274b74531b61ddbaf",
+    "publishedGitHeadResolved": false,
+    "licenseSource": "https://raw.githubusercontent.com/theKashey/react-remove-scroll-bar/8ca9ba5ea52de03308fe8ced94f7b159a44d28ff/LICENSE",
+    "sha256": "a79aae0c0f21990d9d963bb3c5a79cdcea9a46f8523ba55c58d7fe776b6ebc84",
+    "status": "Upstream MIT notice retained; exact published-commit mapping remains unverified",
+    "reason": "npm artifact declares MIT but omits notice; its gitHead was not resolvable in the declared upstream repository. Do not infer an exact release mapping.",
+    "registryMetadata": "https://registry.npmjs.org/react-remove-scroll-bar/2.3.8",
+    "registryTarball": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.8.tgz",
+    "tarballIntegrity": "sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==",
+    "lockIntegrityMatchesTarball": true,
+    "tarballSha256": "ccc872d7a2dc007cbf9d755f30d56b8d80eabdbe22c44c95a709129bfdc46f01",
+    "tarballLicenseEntries": [],
+    "registryLicenseDeclaration": "MIT",
+    "registryGitHead": "b3b1287aad81def2e2ae707274b74531b61ddbaf",
+    "officialTagFor2_3_8Found": false
+  },
+  "decision": "Do not treat adjacent-version notice as2.3.8 proof. Use peer-compatible2.3.7 with matching registry gitHead/v2.3.7 and upstream comparison that adds LICENSE only; all tests and vulnerability scans rerun."
+}

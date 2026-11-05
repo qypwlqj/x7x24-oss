@@ -1,0 +1,747 @@
+{
+  "repository": "example/x7x24",
+  "workspace": "/workspace/x7x24",
+  "baseline": "13efaeaccc4e12ed2549afb78dc67b58ebe7ca70",
+  "branch": "impl/m0-m1-typed-runtime",
+  "implementationHead": "7f64c2d68a57916d271fd4246ff24ec4ce3e81fb",
+  "outcome": "已补齐受控候选、结构化计划/审批编辑器及实际 Engine 适配接线，并增加已接入 typed runtime 的受限本地文件执行、Skill v2 最小解析与上下文门禁。真实交付、完整 runner 和 M2 全部退出条件仍未完成。",
+  "authorization": {
+    "cloudOnly": true,
+    "macUsed": false,
+    "productionDatabaseRead": false,
+    "realGitHubWrites": false,
+    "realLlmCalls": false,
+    "smtpCalls": false,
+    "deployment": false,
+    "push": false,
+    "pullRequestCreated": false,
+    "permissionExpansion": false,
+    "newExternalCredentials": false
+  },
+  "environment": {
+    "node": "24.22.1",
+    "java": "Eclipse Temurin JDK 21.0.12.1 from official eclipse-temurin:21-jdk image",
+    "maven": "3.9.9",
+    "postgres": "17 in disposable local Docker container; non-superuser x7app fixture only",
+    "toolDirectory": "/tmp/x7-tools",
+    "dependencySources": [
+      "registry.npmjs.org",
+      "repo.maven.apache.org",
+      "official Apache Maven archive",
+      "official Node.js distribution",
+      "official Docker library images"
+    ],
+    "setupIssuesResolved": [
+      "Initial Maven cache was outside writable roots; relocated to /tmp/x7-m2.",
+      "JRE existed but javac was absent; installed isolated official JDK.",
+      "Environment proxy and existing /etc/ssl/certs/java/cacerts were used; TLS verification was not disabled.",
+      "101 npm lockfile mirror URLs were normalized to official npm; versions and integrity hashes unchanged."
+    ]
+  },
+  "commits": [
+    {
+      "sha": "61468469ffb2ed9299167bfb4836c6a3a134dea2",
+      "subject": "fix: fail closed on missing evidence and ambiguous GitHub writes"
+    },
+    {
+      "sha": "03bbf859bef1a302f01dc1599554f73a249b0355",
+      "subject": "feat: add schema 3 contracts and fenced serial workflow runtime"
+    },
+    {
+      "sha": "eb62fa8d3ef7d771d1bdacd83ed6be2c7be25ea1",
+      "subject": "fix: block new attempts until earlier write outcomes are reconciled"
+    },
+    {
+      "sha": "97f32a579b1e549bb1995f9bda949bb65cc86abb",
+      "subject": "fix: report actual executor availability separately from fixture contracts"
+    },
+    {
+      "sha": "3e65b624c6654aee228e3aa7ec63df2e0d3a0963",
+      "subject": "fix: meter failed design reviews and validate their evidence subjects"
+    },
+    {
+      "sha": "48b22f0eeeb9170adb47700a17797385369bcd60",
+      "subject": "fix: derive policy snapshots from the server and reject execution drift"
+    },
+    {
+      "sha": "d98c0449590b2c7984ee4ade799c16d9b1dbab5e",
+      "subject": "test: enforce approved policy identity at attempt and result boundaries"
+    },
+    {
+      "sha": "52be0c7a96a313d0acf7379d9110cd5456dd8a50",
+      "subject": "fix: require complete Actions and check-run pagination before gates"
+    },
+    {
+      "sha": "0ff7d71a68915ee87ed1a3655acb516387efca67",
+      "subject": "test: reject truncated check evidence and second-page failures"
+    },
+    {
+      "sha": "7ee8f4ea7339bdc3d5ae0543da06b08397cb9a54",
+      "subject": "docs: record M0 M1 verification evidence and remaining exit gates"
+    },
+    {
+      "sha": "b69ef82483d4df15f6c00992d0f10287267ae2a5",
+      "subject": "feat: compile controlled candidates and connect versioned approval editor"
+    },
+    {
+      "sha": "1ae765994a9a890ce399aa8d0b4e1672602998b4",
+      "subject": "feat: wire bounded local execution and skill context guards into typed runtime"
+    },
+    {
+      "sha": "a010a28211b46576e9f2657e9db3606132a783c7",
+      "subject": "feat: add structured workflow editing and execution evidence views"
+    },
+    {
+      "sha": "fb8ead6f56ad36d40bdfe688e2e0ca605b6716b3",
+      "subject": "fix: bind input approvals to exact versions and extend execution RLS checks"
+    },
+    {
+      "sha": "7f64c2d68a57916d271fd4246ff24ec4ce3e81fb",
+      "subject": "fix: drain event streams before graceful server shutdown"
+    }
+  ],
+  "changedFiles": [
+    "apps/server-java/src/main/java/com/x7x24/Wiring.java",
+    "apps/server-java/src/main/java/com/x7x24/adapters/GitHubClient.java",
+    "apps/server-java/src/main/java/com/x7x24/adapters/GitHubTools.java",
+    "apps/server-java/src/main/java/com/x7x24/agents/Committee.java",
+    "apps/server-java/src/main/java/com/x7x24/agents/LlmAgents.java",
+    "apps/server-java/src/main/java/com/x7x24/agents/Models.java",
+    "apps/server-java/src/main/java/com/x7x24/chat/ChatApi.java",
+    "apps/server-java/src/main/java/com/x7x24/chat/ChatService.java",
+    "apps/server-java/src/main/java/com/x7x24/chat/Draft.java",
+    "apps/server-java/src/main/java/com/x7x24/engine/Engine.java",
+    "apps/server-java/src/main/java/com/x7x24/engine/Patrol.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/CodingExecutor.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/ExecutionGuard.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/LocalCodingExecutor.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/LocalControlledWorkspace.java",
+    "apps/server-java/src/main/java/com/x7x24/llm/ModelRouter.java",
+    "apps/server-java/src/main/java/com/x7x24/llm/OpenAiCompatProvider.java",
+    "apps/server-java/src/main/java/com/x7x24/pipeline/Checks.java",
+    "apps/server-java/src/main/java/com/x7x24/pipeline/Pipeline.java",
+    "apps/server-java/src/main/java/com/x7x24/pipeline/PipelineService.java",
+    "apps/server-java/src/main/java/com/x7x24/pipeline/RolePlans.java",
+    "apps/server-java/src/main/java/com/x7x24/skills/SkillReleases.java",
+    "apps/server-java/src/main/java/com/x7x24/skills/SkillResolver.java",
+    "apps/server-java/src/main/java/com/x7x24/web/PipelineApi.java",
+    "apps/server-java/src/main/java/com/x7x24/web/Runtime.java",
+    "apps/server-java/src/main/java/com/x7x24/web/Sse.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ArtifactSchemas.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/CandidatePlanner.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/CandidateService.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/Canonical.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ContextBuilder.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/DefinitionRegistry.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/Definitions.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ExecutionLeases.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/LegacyJsonDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/LocalFileDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ModelBudgetGuard.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/PlanCompiler.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/RoleSnapshotResolver.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/Workflow.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowApi.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowNodeDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowRuntime.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowScheduler.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowStore.java",
+    "apps/server-java/src/main/resources/db/migration/common/V22__operation_intents.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V23__typed_workflow.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V25__workflow_candidates.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V27__local_executor_evidence.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V29__skill_release_revocation.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V24__typed_workflow_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V26__workflow_candidate_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V28__skill_evaluation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V30__skill_revocation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V24__typed_workflow_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V26__workflow_candidate_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V28__skill_evaluation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V30__skill_revocation_rls.sql",
+    "apps/server-java/src/test/java/com/x7x24/engine/BudgetMeterIT.java",
+    "apps/server-java/src/test/java/com/x7x24/execution/ContextBuilderTest.java",
+    "apps/server-java/src/test/java/com/x7x24/execution/LocalControlledWorkspaceTest.java",
+    "apps/server-java/src/test/java/com/x7x24/execution/ModelBudgetGuardTest.java",
+    "apps/server-java/src/test/java/com/x7x24/it/ApiIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/ChatScenarioIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/GitHubAdapterIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/LocalExecutorRuntimeIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/PostgresRlsIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/TypedLegacyRuntimeIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/TypedWorkflowIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/WorkflowCandidateIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/WorkflowEditorApiIT.java",
+    "apps/server-java/src/test/java/com/x7x24/skills/SkillResolverTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/ChecksTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/GitHubTransportTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/LlmAgentsTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/ModelRouteSnapshotTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/OpenAiCompatProviderTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/RuntimeWatchdogTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/SseLifecycleTest.java",
+    "apps/server-java/src/test/java/com/x7x24/workflow/PlanCompilerTest.java",
+    "apps/web/src/components/ComposableSettings.tsx",
+    "apps/web/src/components/MergeGateCard.tsx",
+    "apps/web/src/components/TaskPipeline.tsx",
+    "apps/web/src/components/WorkflowEditor.tsx",
+    "apps/web/src/components/WorkflowExecution.tsx",
+    "apps/web/src/components/WorkflowPlanForm.tsx",
+    "apps/web/src/lib/chat.ts",
+    "apps/web/src/lib/resource.test.ts",
+    "apps/web/src/lib/resource.ts",
+    "apps/web/src/lib/workflow.test.ts",
+    "apps/web/src/lib/workflow.ts",
+    "apps/web/src/pages/Chat.tsx",
+    "apps/web/src/pages/LinePipeline.tsx",
+    "apps/web/src/pages/TaskDetail.tsx",
+    "apps/web/src/router.ts",
+    "docs/m0-m1-verification.json",
+    "package-lock.json"
+  ],
+  "migration": {
+    "previousHighestVersion": 21,
+    "addedVersions": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "existingMigrationsChanged": false,
+    "legacyEvidenceRewritten": false,
+    "productionApplied": false,
+    "h2": "PASS through integration suites",
+    "postgresql": "PASS: fresh disposable PostgreSQL 17 database using existing non-superuser fixture role, forced RLS on 17 new scoped tables, cross-tenant raw SQL/FKs and append-only enforcement; see final regression.",
+    "highestVersion": 30
+  },
+  "frontend": {
+    "command": "npm run verify",
+    "result": "PASS",
+    "typecheck": "PASS",
+    "vitestFiles": 23,
+    "vitestTests": 126,
+    "build": "PASS",
+    "logPath": "/tmp/x7-frontend-followup-final.log",
+    "logSha256": "eff71b253a38cb420774e95ecb3de5dc6464d549880a055f29efcb90b3d8db69"
+  },
+  "backend": [
+    {
+      "command": "mvn verify",
+      "scope": "Full regression checkpoint before final safety follow-ups. 375 total includes 7 PostgreSQL tests and 3 live tests skipped by existing environment gates. Subsequent affected suites were rerun below.",
+      "result": "PASS_WITH_SHUTDOWN_WARNING",
+      "counts": {
+        "total": 375,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 10
+      },
+      "logPath": "/tmp/x7-maven-final.log",
+      "logSha256": "bc2839fe301c884c2504c4d36d3f53714ffbf8f09d530d494caa6d0c8ab6a536"
+    },
+    {
+      "command": "X7_PG_TEST_URL=<disposable-local-db> mvn -Dtest=PostgresRlsIT,TypedWorkflowIT,PlanCompilerTest,UserMessageLintTest,ModelRouteSnapshotTest,LlmAgentsTest,GitHubAdapterIT verify",
+      "scope": "Final migration/RLS, schema 3, role, model snapshot and GitHub suite checkpoint. No real provider calls.",
+      "result": "PASS",
+      "counts": {
+        "total": 50,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "logPath": "/tmp/x7-acceptance-final.log",
+      "logSha256": "b6de651fabed6dfb17726f5851b588b6a96fc145b8856bcdc44458ef0d43a1b8"
+    },
+    {
+      "command": "mvn -Dtest=TypedWorkflowIT,PlanCompilerTest,LlmAgentsTest,LiveComposableIT,LivePrdIT,LiveSplitIT,UserMessageLintTest verify",
+      "scope": "Latest policy identity and failed-review accounting changes; 3 live tests skipped deliberately.",
+      "result": "PASS",
+      "counts": {
+        "total": 37,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      },
+      "logPath": "/tmp/x7-last-regression.log",
+      "logSha256": "8e82b8b41cdb4266e08922fe105a2926502703f7cead06cf65c6131785daca87"
+    },
+    {
+      "command": "mvn -Dtest=GitHubAdapterIT,GitHubTransportTest,LiveComposableIT,LiveSplitIT,UserMessageLintTest verify",
+      "scope": "Final GitHub pagination and cross-attempt unknown-write guards; 2 live tests skipped deliberately.",
+      "result": "PASS",
+      "counts": {
+        "total": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "logPath": "/tmp/x7-github-final.log",
+      "logSha256": "8f9f5e67df6c57928edc31c4dac0dade031ac183a60a236330faaa61c57b2991"
+    },
+    {
+      "command": "mvn -o -Dtest=TypedWorkflowIT,TypedLegacyRuntimeIT,LocalExecutorRuntimeIT,WorkflowCandidateIT,WorkflowEditorApiIT,OpenAiCompatProviderTest,ModelBudgetGuardTest,UserMessageLintTest test",
+      "result": "PASS",
+      "counts": {
+        "total": 38,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "logPath": "/tmp/x7-followup-safety.log",
+      "logSha256": "ec57852258d3672da95a6721f3af4dc66c5bb2a064c2b9ad42ea309c9aeeb1af"
+    },
+    {
+      "command": "X7_PG_TEST_URL=jdbc:postgresql://localhost:55432/x7m2review X7_PG_TEST_USER=x7app mvn -o verify (same Maven/JDK/cache/truststore invocation)",
+      "result": "PASS_WITH_SHUTDOWN_WARNING",
+      "counts": {
+        "total": 404,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      },
+      "logPath": "/tmp/x7-backend-followup-final.log",
+      "logSha256": "83eaa4e7a6af84b0e521ce5c6105523f71617e483cf07670cbf70e09adc449fa"
+    },
+    {
+      "command": "X7_PG_TEST_URL=jdbc:postgresql://localhost:55432/x7m2final X7_PG_TEST_USER=x7app mvn -o verify (final after SSE lifecycle fix)",
+      "result": "PASS",
+      "counts": {
+        "total": 405,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      },
+      "logPath": "/tmp/x7-backend-followup-clean-final.log",
+      "logSha256": "dd75c16eedd271e49ddc391a4c5dc2071de22295a2a5085575eb57aa9e180048"
+    }
+  ],
+  "mavenInvocation": "JAVA_HOME=/tmp/x7-tools/jdk /tmp/x7-tools/apache-maven-3.9.9/bin/mvn -s /tmp/x7-maven-settings.xml -Dmaven.repo.local=/tmp/x7-m2 -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -f apps/server-java/pom.xml <goals>",
+  "counterexamples": {
+    "baseline": "13efaeaccc4e12ed2549afb78dc67b58ebe7ca70",
+    "tests": 3,
+    "expectedFailures": 3,
+    "result": "CONFIRMED_RED",
+    "cases": [
+      "A read exception must not become PASS.",
+      "An unknown check must produce a blocking result.",
+      "An ambiguous POST 503 must not be transparently retried."
+    ],
+    "logPath": "/tmp/x7-baseline-red-confirmed.log",
+    "note": "Tests were authored before the relevant fixes; execution of red tests was initially blocked by missing toolchain and dependencies, then confirmed against a separate cloud baseline worktree."
+  },
+  "provenance": {
+    "fixtureRuns": "Synthetic GitHub HTTP, provider scripts and typed artifacts are explicitly test doubles; their success is not real integration evidence.",
+    "postgres": "Real Flyway and RLS checks against disposable local PostgreSQL, never production.",
+    "builds": "Real local TypeScript/Vite/Javac/Maven execution.",
+    "liveE2E": "NOT_EXECUTED; no live scripts run."
+  },
+  "M0ExitGates": [
+    {
+      "gate": "maker/fixer/checker 接线",
+      "state": "PASS_FOR_IMPLEMENTED_REGRESSION",
+      "evidence": [
+        "LlmAgentsTest: distinct maker/fixer skills and models captured",
+        "PRD checker seats use pinned checker profile and skills",
+        "design review failure usage is charged and thrown; design review subject includes artifact kind and PRD"
+      ],
+      "remaining": "完整 API/DB/最终评审的逐组合捕获矩阵仍可补强。"
+    },
+    {
+      "gate": "五态、未知检查与缺证据拒绝",
+      "state": "PASS",
+      "evidence": [
+        "PASS/FAIL/UNKNOWN/SKIPPED/ERROR",
+        "unknown check, read failure, bad locale baseline, zero CI jobs fail closed",
+        "required skip exemption is explicit NO_APPLICABLE_FILES only"
+      ],
+      "remaining": "真实测试条数与 AC 满足不能由 Actions job 数证明；真正 runner 报告为 M2。删除文件未显式传递删除状态时会保守阻断。"
+    },
+    {
+      "gate": "GitHub 分页完整性",
+      "state": "PASS",
+      "evidence": [
+        "PR files and patches all pages",
+        "Actions jobs/runs and commit checks envelope pagination",
+        "second-page forbidden file and failed check blocked",
+        "declared total mismatch and PR manifest cap block"
+      ]
+    },
+    {
+      "gate": "写结果未知与重复请求",
+      "state": "PASS_SAFE_BLOCKING",
+      "evidence": [
+        "durable intent before dispatch",
+        "no POST/PUT/PATCH generic retry on network/5xx",
+        "Issue/comment deterministic marker reconciliation",
+        "missing remote proof remains unknown",
+        "new attempt/key cannot bypass an unresolved write"
+      ],
+      "remaining": "commit/PR/Release 等没有可靠对账结果时保守阻塞；未实现全部操作的自动对账与外部崩溃注入。"
+    },
+    {
+      "gate": "UI 错误态、恢复、场景、预览、深链接",
+      "state": "PASS_FOR_IMPLEMENTED_REGRESSION",
+      "evidence": [
+        "merge-gate load failures visible and approval blocked",
+        "successful refresh clears errors",
+        "scenario presetId persisted and shown; fast preset is not a gate bypass",
+        "configuration preview distinguished from actual execution/history cost",
+        "query-style task evidence tab/focus links parse correctly"
+      ],
+      "remaining": "无浏览器交互/视觉验收，不把静态和函数测试冒充浏览器 E2E。"
+    },
+    {
+      "gate": "独立 watchdog 与记账",
+      "state": "PASS",
+      "evidence": [
+        "watchdog observed while engine.tick blocks",
+        "multiple calls in one attempt separately metered",
+        "failed design/LLM reviews preserve reported usage"
+      ]
+    },
+    {
+      "gate": "真实小需求形成准确状态与当前证据",
+      "state": "NOT_EXECUTED",
+      "reason": "本任务禁止真实 GitHub/LLM/SMTP/部署副作用，未运行 live-e2e。M0 整体真实交付退出门槛不可宣称已满足。"
+    }
+  ],
+  "M1ExitGates": [
+    {
+      "gate": "schema=3 类型合同与显式多源 binding",
+      "state": "PASS_FOR_MINIMUM_KERNEL",
+      "evidence": [
+        "versioned registered definitions",
+        "frontend PRD+design, backend PRD+existing contract, fullstack both compile and serialize serial fixture outputs",
+        "required/conditional/type/schema/scope/cycle/cardinality checks",
+        "scope conditions require pinned scopeEvidence.features rather than planner self-report"
+      ],
+      "remaining": "仅少量首批合同有运行实现；其余类型不等于可用执行器。"
+    },
+    {
+      "gate": "ArtifactVersion、校验/批准分离、固定输入与失效",
+      "state": "PASS_FOR_MINIMUM_KERNEL",
+      "evidence": [
+        "immutable version content and lineage",
+        "schema validation does not claim business acceptance",
+        "approval digest, expiry and revocation are separate",
+        "resolved versions and ABSENT included in canonical fingerprint",
+        "plan-scoped downstream invalidation retains history",
+        "exact immutable version/provenance/SHA approval subject",
+        "input revocation rechecked before result publication"
+      ],
+      "remaining": "完整逻辑 artifact 身份/版本序列、报告对象存储与业务验证 profile 尚需扩展。"
+    },
+    {
+      "gate": "PlanCompiler 与稳定拓扑串行",
+      "state": "PASS",
+      "evidence": [
+        "deterministic compile/hash/order",
+        "missing input/capability/unknown condition blocked",
+        "per-task single NodeRun with durable task/repository lease",
+        "no parallel execution admission"
+      ]
+    },
+    {
+      "gate": "NodeRun、执行权与最小 fencing/恢复",
+      "state": "PASS_WITH_RESTRICTED_ADAPTER",
+      "evidence": [
+        "inputs, snapshot, fingerprint, owner and epoch persisted",
+        "lease expiry becomes OUTCOME_UNKNOWN",
+        "replacement requires authenticated old-executor stop confirmation with evidence and no unresolved writes",
+        "late old epoch result rejected",
+        "typed LegacyJson adapter has read-only GitHub boundary",
+        "canonical frozen repository identity shares lease across projects in one workspace",
+        "live authority guards at actual local primitive/read/model send boundaries",
+        "durable local jobs/events/results and unknown-state blocking"
+      ],
+      "remaining": "跨工作区/多实例的真实出站写代理 fencing、真实 runner 终止及接管仍未演练；当前 JSON adapter 只读，本地 adapter 无网络且不执行任意代码。"
+    },
+    {
+      "gate": "旧 v1/v2 路由与历史兼容",
+      "state": "PASS",
+      "evidence": [
+        "new tasks explicitly marked v3; old tasks not converted",
+        "legacy route is refused by typed scheduler",
+        "closing v3 admission does not reroute in-flight v3",
+        "wire/legacy tests in full regression",
+        "historical evidence not upgraded to verified"
+      ]
+    },
+    {
+      "gate": "最小角色/Skill 快照",
+      "state": "PASS_FOR_INSTRUCTION_SKILLS",
+      "evidence": [
+        "snapshot immutable instruction versions and role slots",
+        "server-derived policy identity and model route digest",
+        "configuration drift blocks rather than silently changing an approved plan",
+        "explicit IMPLEMENT/REPAIR and ExecutionAddress in typed adapter",
+        "actual request filters conditional skill activation and records evaluation",
+        "minimum v2 closure/parameters/obligations/capability/revocation resolver wired into typed role snapshots"
+      ],
+      "remaining": "完整技能发布/依赖参数映射/能力包、通用版本约束及配置 UI 仍属 M2 后续。"
+    },
+    {
+      "gate": "候选规划、批准 UI、人工产物交接与任务驾驶舱",
+      "state": "PASS_FOR_MINIMUM_EDITOR_AND_ADAPTER_CHAIN",
+      "evidence": [
+        "deterministic registered planner plus explicit fake-LLM adapter tested through compiler",
+        "immutable generate/edit/compile/save candidates with expectedVersion/hash checks",
+        "structured nodes/bindings/controls form with advanced JSON disclosure",
+        "saved plan approve/activate/revoke, design version approval and human output API/UI",
+        "Engine to actual legacy dispatcher with mock provider consumes pinned inputs and writes manifests",
+        "job/context/skill execution projection"
+      ],
+      "remaining": "未接真实在线 Planner/runner；材料与人工输出内容仍为 JSON 输入，未做浏览器 E2E 或完整引导配置。"
+    },
+    {
+      "gate": "真实前端/后端/全栈端到端交付",
+      "state": "NOT_EXECUTED",
+      "reason": "只有合同与串行 fixture 交接验证；未接真实隔离 runner、浏览器或 PR 交付，均未冒充真实联调。"
+    }
+  ],
+  "admission": {
+    "default": "disabled",
+    "property": "x7x24.workflow-v3-admission=false",
+    "parallel": false,
+    "ruleFallback": "Unavailable as general typed coding capability when no LLM execution is configured; fixtures use an explicit isolated test registry override.",
+    "localExecutorProperty": "x7x24.local-file-executor-enabled=false"
+  },
+  "remainingBlockers": [
+    {
+      "action": "接入真实 CodingExecutor harness，并执行真实项目命令/浏览器/受控 PR 交付验收",
+      "target": "尚未选定的隔离 runner 与一次性测试仓库",
+      "state": "NOT_EXECUTED_UNSELECTED_CAPABILITY_AND_AUTHORIZATION_BOUNDARY",
+      "denied": false,
+      "uncertainExternalOutcome": false,
+      "completed": "无网络本地 primitive adapter、协议生命周期、typed runtime 接线与契约/负例验证已完成",
+      "reason": "本任务禁止真实 GitHub/LLM/SMTP/部署副作用，且真实 runner、费用上限、数据外发边界未选定",
+      "minimumNextAction": "后续在云端明确授权 runner/测试仓库/费用和数据边界后接入；无需用户 Mac。"
+    }
+  ],
+  "reviewRisks": [
+    "M0/M1 的真实交付退出门槛和 M2 全部退出门槛尚未满足，fixtures 不冒充真实联调。",
+    "安全加固会把缺证据、未知结果、旧输入批准或配置漂移变为阻塞；需要对应版本的重新核验。",
+    "现有 v1/v2 继续旧执行语义，未整体迁入新持久 lease runtime。",
+    "真实跨工作区/多实例出站写 fencing 尚未提供；新 adapter 无远端写能力，准入默认关闭。",
+    "本地受控文件 adapter 不执行任意项目命令，不是生产不可信代码沙箱。",
+    "范围分类和上下文预算使用明确的最小规则及保守估算，不替代业务语义评审或真实测试。",
+    "费用台账记录已报告用量；供应商未返回的消耗无法凭空补成准确账单。"
+  ],
+  "deliveryPaths": {
+    "patch": "/workspace/x7x24-m0-m1.patch",
+    "bundle": "/workspace/x7x24-m0-m1.bundle",
+    "report": "/workspace/x7x24/docs/m0-m1-verification.json",
+    "fixtureBackup": "/workspace/x7x24-fixture-backup.sql",
+    "logs": "/workspace/x7x24-verification-logs.tar.gz"
+  },
+  "firstDelivery": {
+    "commit": "7ee8f4ea7339bdc3d5ae0543da06b08397cb9a54",
+    "description": "M0/M1 minimum kernel with read-only execution projection; original checkpoint results retained in backend."
+  },
+  "followupFiles": [
+    "apps/server-java/src/main/java/com/x7x24/agents/LlmAgents.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/CodingExecutor.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/ExecutionGuard.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/LocalCodingExecutor.java",
+    "apps/server-java/src/main/java/com/x7x24/execution/LocalControlledWorkspace.java",
+    "apps/server-java/src/main/java/com/x7x24/llm/ModelRouter.java",
+    "apps/server-java/src/main/java/com/x7x24/llm/OpenAiCompatProvider.java",
+    "apps/server-java/src/main/java/com/x7x24/skills/SkillReleases.java",
+    "apps/server-java/src/main/java/com/x7x24/skills/SkillResolver.java",
+    "apps/server-java/src/main/java/com/x7x24/web/Sse.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/CandidatePlanner.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/CandidateService.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ContextBuilder.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/DefinitionRegistry.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/Definitions.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/LegacyJsonDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/LocalFileDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/ModelBudgetGuard.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/RoleSnapshotResolver.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowApi.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowNodeDispatcher.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowRuntime.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowScheduler.java",
+    "apps/server-java/src/main/java/com/x7x24/workflow/WorkflowStore.java",
+    "apps/server-java/src/main/resources/db/migration/common/V25__workflow_candidates.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V27__local_executor_evidence.sql",
+    "apps/server-java/src/main/resources/db/migration/common/V29__skill_release_revocation.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V26__workflow_candidate_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V28__skill_evaluation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/h2/V30__skill_revocation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V26__workflow_candidate_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V28__skill_evaluation_rls.sql",
+    "apps/server-java/src/main/resources/db/migration/postgresql/V30__skill_revocation_rls.sql",
+    "apps/server-java/src/test/java/com/x7x24/execution/ContextBuilderTest.java",
+    "apps/server-java/src/test/java/com/x7x24/execution/LocalControlledWorkspaceTest.java",
+    "apps/server-java/src/test/java/com/x7x24/execution/ModelBudgetGuardTest.java",
+    "apps/server-java/src/test/java/com/x7x24/it/ApiIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/LocalExecutorRuntimeIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/PostgresRlsIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/TypedLegacyRuntimeIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/TypedWorkflowIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/WorkflowCandidateIT.java",
+    "apps/server-java/src/test/java/com/x7x24/it/WorkflowEditorApiIT.java",
+    "apps/server-java/src/test/java/com/x7x24/skills/SkillResolverTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/OpenAiCompatProviderTest.java",
+    "apps/server-java/src/test/java/com/x7x24/unit/SseLifecycleTest.java",
+    "apps/web/src/components/WorkflowEditor.tsx",
+    "apps/web/src/components/WorkflowExecution.tsx",
+    "apps/web/src/components/WorkflowPlanForm.tsx",
+    "apps/web/src/lib/workflow.test.ts",
+    "apps/web/src/lib/workflow.ts",
+    "apps/web/src/pages/TaskDetail.tsx"
+  ],
+  "followup": {
+    "since": "7ee8f4ea7339bdc3d5ae0543da06b08397cb9a54",
+    "added": [
+      "Registered deterministic candidate generator and injectable LLM proposal adapter, immutable idempotent candidates, compiler-authoritative save and fake-LLM malicious proposal rejection; no live planner provider auto-wiring.",
+      "Structural draft UI for versioned nodes, typed fixed-version/upstream port bindings, list sources, control edges and budget; saved plan approval/activation/revocation, design-version approval and human-output submission use backend version/digest checks.",
+      "Engine to LegacyJsonDispatcher to LlmAgents mock-provider proof of exact inputs, execution address, roles, context and live revocation guards; synthetic fixtures are clearly labelled.",
+      "Local controlled primitive executor wired into Engine serial runtime: durable job intent/key/digest, sequenced events, cancellation request, result export/hash, unknown recovery and explicit unsupported cross-process resume.",
+      "Per-role Skill resolver with transitive locking, exact/caret constraints, cycle/conflict rejection, parameter scope/allowlist checks, required/optional obligations, three-value applicability, capability and live revocation checks; existing instruction skills feed actual requests.",
+      "ContextBuilder fixed-version projection and provenance manifest, required-input overflow rejection, optional omission trace, final request budget check, live authority recheck before every primitive/read/model call and immediately before HTTP send.",
+      "Artifact approvals now bind the whole immutable version envelope including provenance and base SHA, rather than content alone; final result publication revalidates input approvals.",
+      "SSE context-close drains and completes streams before graceful web-server shutdown; the leaking test input stream is now closed. No timeout override or test disable was used.",
+      "Conservative priced-model/fallback/retry budget preflight; reported failed provider usage remains charged. New tables have forced PostgreSQL RLS, composite scope FKs and immutable event/manifest/revocation tests."
+    ],
+    "stillMissing": [
+      "No selected real CodingExecutor harness, arbitrary project commands, real coding tool loop, browser runner, real PR/CI/delivery or deployment integration.",
+      "Local primitive adapter is an in-process controlled file test implementation, not OS isolation for arbitrary untrusted code; projectTestExecution=false and businessValidation=UNKNOWN.",
+      "Cross-process resume is explicitly unsupported; no real runner submit-response-loss/termination/takeover test or outbound GitHub write fencing proxy.",
+      "Skill v2 published package/fixture pipeline, dependency parameter mappings, general semver grammar, global multi-scope configuration UI and executable capability packs remain partial.",
+      "ContextBuilder uses conservative byte-based token estimates and fixed caps; no full retrieval/compression/ProjectKnowledge loop or large-artifact object storage lifecycle.",
+      "Editor material import and human output still use JSON fields; structured node/binding forms exist, but complete guided role/Skill/condition forms and browser interaction acceptance are not done.",
+      "Schema 3 task creation has an opt-in API, not a complete guided task creation experience. Admission and local executor stay disabled by default.",
+      "Only contract/adapter fixtures cover frontend/backend/fullstack scenarios; real end-to-end M0/M1/M2 exit gates remain NOT_EXECUTED under the explicit external-effect restriction."
+    ]
+  },
+  "frontendFirstCheckpoint": {
+    "command": "npm ci (official registry, isolated cache); npm run verify",
+    "result": "PASS",
+    "typecheck": "PASS",
+    "vitestFiles": 22,
+    "vitestTests": 121,
+    "build": "PASS",
+    "logPath": "/tmp/x7-frontend-complete.log",
+    "logSha256": "f5e16959b5531e0909712f17af0e0657398edddb2a595a431cfcf05a537c3354"
+  },
+  "backupRestore": {
+    "result": "PASS",
+    "source": "disposable PostgreSQL x7m2review",
+    "restore": "disposable PostgreSQL x7m2restore",
+    "tableCountsEqual": true,
+    "counts": [
+      "approval_record|0",
+      "artifact_invalidation|0",
+      "artifact_lineage|0",
+      "artifact_validation|0",
+      "artifact_version|1",
+      "coding_job|1",
+      "coding_job_event|1",
+      "context_manifest|1",
+      "control_dependency|0",
+      "execution_lease|0",
+      "input_binding|0",
+      "node_instance|1",
+      "node_run|1",
+      "skill_evaluation|1",
+      "skill_release_revocation|1",
+      "task|5",
+      "workflow_candidate|1",
+      "workflow_plan_revision|1"
+    ],
+    "restoredNonSuperuser": true,
+    "restoredCrossTenantRls": "PASS",
+    "dump": "/workspace/x7x24-fixture-backup.sql",
+    "productionData": false,
+    "schemaVersion": 30,
+    "scope": "Synthetic schema/data counts and restored non-superuser RLS smoke; not running-task recovery or production backup validation."
+  },
+  "additionalCounterexamples": [
+    {
+      "case": "Revoking a design approval while a node runs must reject publication",
+      "result": "CONFIRMED_RED_THEN_GREEN",
+      "redLog": "/tmp/x7-followup-red.log",
+      "greenLog": "/tmp/x7-followup-safety.log"
+    },
+    {
+      "case": "Identical design content on a different immutable version must not reuse approval",
+      "result": "CONFIRMED_RED_THEN_GREEN",
+      "redLog": "/tmp/x7-artifact-approval-red.log",
+      "greenLog": "/tmp/x7-followup-safety.log"
+    },
+    {
+      "case": "Open SSE streams must be drained when the application context closes",
+      "result": "CONFIRMED_RED_THEN_GREEN",
+      "redLog": "/tmp/x7-sse-shutdown-red.log",
+      "greenLog": "/tmp/x7-backend-followup-clean-final.log"
+    }
+  ],
+  "uiScope": {
+    "structural": [
+      "node instance ID/definition",
+      "typed pinned artifact and upstream output bindings",
+      "list-input sources",
+      "control dependencies",
+      "budget",
+      "saved plan/approval/activation/revocation"
+    ],
+    "jsonOnly": [
+      "artifact content import",
+      "human output content",
+      "advanced full plan JSON including advanced role/skill settings"
+    ],
+    "browserE2e": "NOT_EXECUTED",
+    "tested": "typecheck, pure draft/approval helpers, real loopback HTTP API contracts"
+  },
+  "approvalBinding": {
+    "plan": "immutable compiled plan hash covers fixed input version IDs, plan/revision, repo base SHA, roles/skills/models/policy and config; NodeRun fingerprints additionally include resolved input content digests; task expectedVersion checked for state commands",
+    "input": "artifact approval subject digest includes complete immutable ArtifactVersion envelope: ID, workspace/project/task, content digest/schema, source/producer/lineage and base SHA; minimal v3 envelope has no separate headSha field, and real commit attestation remains future runner work",
+    "freshness": "expiry/revocation and current policy/role configuration rechecked at activation, start, every adapter action/model send and result publication",
+    "compatibility": "Earlier schema 3 content-only design approvals do not satisfy the stricter input subject; explicit reapproval is required. v1/v2 approval semantics are unchanged."
+  },
+  "M2ExitGates": [
+    {
+      "gate": "CodingExecutor protocol and bounded local lifecycle",
+      "state": "PASS_FOR_LIMITED_LOCAL_ADAPTER",
+      "evidence": [
+        "durable semantic key/digest, lookup/get/events/cancel/export",
+        "Engine dispatch consumes typed PatchSet/RepoSnapshot/AC",
+        "actual temp-file read/search/edit and built-in assertions",
+        "current-tree reports with red/green, zero/stale/conflicting check rejection",
+        "unknown does not resubmit; unsupported resume explicit"
+      ],
+      "remaining": "No arbitrary project tests, OS sandbox/harness, cross-process checkpoint resume or real provider jobs."
+    },
+    {
+      "gate": "Skill v2 minimum and context/authority guards",
+      "state": "PASS_FOR_IMPLEMENTED_SUBSET",
+      "evidence": [
+        "transitive lock/cycle/conflict/scope/parameter/capability fixtures",
+        "conditional required/optional TRUE/FALSE/UNKNOWN",
+        "actual mock request activation and revocation blocking",
+        "required input over-budget blocks before provider",
+        "manifest source/digest and transport-time execution guard"
+      ],
+      "remaining": "Published capability packages, general dependency mappings and complete retrieval/knowledge/permission-evaluation flow remain partial."
+    },
+    {
+      "gate": "real runner read/search/edit/run/observe/fix and PR delivery",
+      "state": "NOT_EXECUTED",
+      "reason": "No real runner selected; live effects explicitly prohibited. Local text/json assertions are not project test execution."
+    }
+  ],
+  "implementationChoices": [
+    "Conditional input facts must be backed by the pinned scopeEvidence version. UNKNOWN produces a blocking compiler diagnostic; dynamic choice/join and parallel admission remain deferred.",
+    "The default planner is a registered deterministic proposal source; an LLM adapter exists for explicit injection and is tested with a fake provider. No live planner/model expense is enabled.",
+    "The local executor uses only closed primitive file actions and built-in assertions in owned empty temporary directories. It cannot run arbitrary scripts and is not advertised as an OS sandbox.",
+    "Artifact input approval now covers exact immutable identity and provenance plus base SHA. The minimal envelope lacks a separate committed head SHA; real code/test attestation remains future runner work.",
+    "Skill constraints initially support exact numeric or caret versions, not arbitrary semver/ranges. Unsupported or conflicting inputs fail explicitly rather than selecting latest.",
+    "Expand-only migrations V22–V30 preserve existing V1–V21 and legacy evidence. Earlier unverified instructions remain INSTRUCTION-only and cannot mint validation PASS."
+  ]
+}

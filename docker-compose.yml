@@ -1,0 +1,28 @@
+# 默认：H2 文件库（数据卷）。使用 PostgreSQL：docker compose --profile pg up，并设置 DATABASE_URL。
+# 令牌只通过环境变量传入（不要写进镜像或 compose 文件）：GITHUB_TOKEN=... docker compose up
+services:
+  x7x24:
+    build: .
+    environment:
+      ADAPTER_MODE: ${ADAPTER_MODE:-offline}
+      ADAPTER_DRY_RUN: ${ADAPTER_DRY_RUN:-true}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      TARGET_REPO: ${TARGET_REPO:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_JUDGE_MODELS: ${LLM_JUDGE_MODELS:-}
+      # 切 PostgreSQL（--profile pg）：取消注释
+      # DATABASE_URL: jdbc:postgresql://postgres:5432/x7x24
+      # DATABASE_USER: x7x24
+      # DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    volumes: [x7x24-data:/data]
+    ports: ["8787:8787"]
+  postgres:
+    profiles: [pg]
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: postgres, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-}", POSTGRES_DB: x7x24 }
+    volumes: [pg-data:/var/lib/postgresql/data]
+volumes:
+  x7x24-data:
+  pg-data:

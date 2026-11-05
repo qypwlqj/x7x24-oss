@@ -1,0 +1,16 @@
+7x24
+Copyright 2026 the 7x24 authors
+
+This product includes material from Alibaba open-code-review
+(https://github.com/alibaba/open-code-review), licensed under the Apache License 2.0:
+  Copyright 2026 Alibaba
+  Files: apps/agent-runner/ocr/skills/open-code-review/SKILL.md (verbatim, unmodified)
+  Version: v1.13.5 (the ocr binary of the same version is downloaded on the runner host
+  by apps/agent-runner/install-ocr.sh and is not redistributed in this repository)
+See THIRD_PARTY.md for details and apps/agent-runner/ocr/LICENSE for the license text.
+
+UI icons use lucide-react (https://github.com/lucide-icons/lucide).
+Lucide is distributed under the ISC license, with MIT terms for its
+Feather-derived icons. The complete upstream copyright and license text
+is retained in third_party/frontend/THIRD_PARTY_NOTICES.txt and emitted
+with the frontend build. See THIRD_PARTY.md for version/source evidence.

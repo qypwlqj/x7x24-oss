@@ -1,0 +1,78 @@
+:root,
+.light {
+  color-scheme: light;
+  --c-canvas: 231 231 231;
+  --c-surface: 243 243 241;
+  --c-raised: 243 243 241;
+  --c-sunken: 220 220 216;
+  --c-line: 196 196 192;
+  --c-line-strong: 92 92 88;
+  --c-ink: 5 5 5;
+  --c-ink-2: 58 58 56;
+  --c-ink-3: 92 92 88;
+  --c-ink-inverse: 220 220 218;
+  --c-neon-cyan: 5 5 5;
+  --c-neon-magenta: 110 68 32;
+  --c-neon-lime: 18 100 52;
+  --c-neon-violet: 58 58 56;
+  --c-neon-yellow: 140 90 10;
+  --c-neon-red: 176 32 48;
+  --c-primary: 5 5 5;
+  --c-primary-hover: 42 42 42;
+  --c-primary-soft: 220 220 216;
+  --c-primary-ink: 5 5 5;
+  --c-primary-fg: 220 220 218;
+  --c-accent: 110 68 32;
+  --c-accent-soft: 236 226 214;
+  --c-accent-ink: 110 68 32;
+  --c-success: 18 100 52;
+  --c-success-soft: 214 232 220;
+  --c-success-ink: 18 100 52;
+  --c-warn: 140 90 10;
+  --c-warn-soft: 244 232 204;
+  --c-warn-ink: 140 90 10;
+  --c-danger: 176 32 48;
+  --c-danger-soft: 244 220 222;
+  --c-danger-ink: 176 32 48;
+  --c-info: 40 40 40;
+  --c-info-soft: 220 220 216;
+  --c-info-ink: 40 40 40;
+  --c-focus: 5 5 5;
+  --c-scrim: 5 5 5;
+  --font-sans: "IBM Plex Mono", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", ui-monospace, monospace;
+  --font-display: "IBM Plex Mono", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", ui-monospace, monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --cut: 0px;
+  --cut-sm: 0px;
+  --glow-a: 0;
+  --glow-cyan: none;
+  --glow-magenta: none;
+  --glow-lime: none;
+  --glow-red: none;
+  --shadow-xs: 0 0 0 1px rgb(5 5 5 / .04);
+  --shadow-sm: 0 1px 0 rgb(5 5 5 / .06);
+  --shadow-md: 0 10px 28px -16px rgb(5 5 5 / .2);
+  --shadow-pop: 0 0 0 1px rgb(5 5 5 / .14), 0 16px 40px -16px rgb(5 5 5 / .22);
+  --sheet-shadow: 2px 3px 0 rgb(5 5 5 / .08);
+  --sheet-shadow-sm: 1px 2px 0 rgb(5 5 5 / .08);
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1  0 0 0 0 .09  0 0 0 0 .08  0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23g)'/%3E%3C/svg%3E");
+  --fx-grid: 0;
+  --fx-scan: 0;
+  --fx-noise: 0;
+  --space-page: 20px;
+  --space-card: 16px;
+  --space-gap: 12px;
+  --sidebar-w: 272px;
+  --sidebar-rail-w: 64px;
+  --dur-fast: 90ms;
+  --dur-base: 150ms;
+  --dur-slow: 240ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+@media (min-width: 1536px) {
+  :root { --space-page: 28px; --space-gap: 16px; --sidebar-w: 288px; }
+}
