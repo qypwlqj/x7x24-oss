@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { LegalDraft } from '@/public-pages/Pricing';
+import { LegalDraft } from '@/public-pages/LegalDraft';
 
 const titles = { terms: '服务条款', privacy: '隐私政策', refund: '退款政策' } as const;
 type Props = { params: Promise<{ doc: string }> };
