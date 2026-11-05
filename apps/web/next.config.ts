@@ -13,7 +13,7 @@ const config: NextConfig = {
     return [{ source: '/api/:path*', destination: `${target}/api/:path*` }];
   },
   async headers() {
-    return [{ source: '/:path(pricing|legal/.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
+    return [{ source: '/:path(legal/.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
   },
 };
 export default config;
